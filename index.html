@@ -6,8 +6,9 @@
   <body>
     <video id="myVideo" autoplay="1"></video>
     <div>
-      <button type="button" onclick="videoStart()">撮影</button>　
-      <button type="button" onclick="videoStop()">停止</button>
+      <button type="button" onclick="videoStart()">Start</button>　
+      <button type="button" onclick="videoStop()">Stop</button>
+      <button type="button" onclick="reverse()">Mirror</button>
       <select></select>
     </div>
 
@@ -47,6 +48,15 @@
               stream.getVideoTracks()[0].stop();
             };
           });
+      }
+
+      function reverse() {
+        var video = document.querySelector("video");
+        if (video.style.transform) {
+          video.style.transform = "";
+        } else {
+          video.style.transform = "rotateY(180deg)";
+        }
       }
 
       async function initialize() {
