@@ -1,93 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Mirror</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <video id="myVideo" autoplay="1"></video>
-    <div>
-      <button type="button" onclick="videoStart()">Start</button>　
-      <button type="button" onclick="videoStop()">Stop</button>
-      <button type="button" onclick="reverse()">Mirror</button>
-      <select></select>
-    </div>
-
-    <script type="text/javascript">
-      function videoStart(deviceId) {
-        var constraints = {
-          audio: false,
-          video: {
-            facingMode: "user",
-            deviceId,
-          },
-        };
-
-        navigator.mediaDevices
-          .getUserMedia(constraints)
-          .then(function (stream) {
-            var video = document.querySelector("video");
-            video.srcObject = stream;
-            video.onloadedmetadata = function (e) {
-              video.play();
-            };
-          });
-      }
-
-      function videoStop() {
-        navigator.mediaDevices
-          .getUserMedia({
-            audio: false,
-            video: {
-              facingMode: "user",
-            },
-          })
-          .then(function (stream) {
-            var video = document.querySelector("video");
-            video.srcObject = stream;
-            video.onloadedmetadata = function (e) {
-              stream.getVideoTracks()[0].stop();
-            };
-          });
-      }
-
-      function reverse() {
-        var video = document.querySelector("video");
-        if (video.style.transform) {
-          video.style.transform = "";
-        } else {
-          video.style.transform = "rotateY(180deg)";
-        }
-      }
-
-      async function initialize() {
-        try {
-          const devices = await navigator.mediaDevices.enumerateDevices();
-          devices
-            .filter(({ kind }) => kind === "videoinput")
-            .forEach(function (device) {
-              console.log(
-                device.kind + ": " + device.label + " id = " + device.deviceId
-              );
-            });
-
-          const select = document.querySelector("select");
-
-          select.innerHTML = devices
-            .filter(({ kind }) => kind === "videoinput")
-            .map(
-              (d) =>
-                `<option value='${d.deviceId}'>${d.kind}: ${d.label}</option>`
-            );
-
-          select.addEventListener("change", (e) => {
-            videoStart(e.target.value);
-          });
-        } catch (err) {
-          console.log(err.name + ": " + err.message);
-        }
-      }
-
-      initialize();
-    </script>
+    <main>
+      <video class="video" autoplay="1"></video>
+      <div class="bottom-toolbar">
+        <button type="button" onclick="videoStart()">Start</button>　
+        <button type="button" onclick="videoStop()">Stop</button>
+        <button type="button" onclick="reverse()">Mirror</button>
+        <select class="select"></select>
+      </div>
+    </main>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
