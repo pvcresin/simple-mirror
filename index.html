@@ -9,11 +9,19 @@
   </head>
   <body>
     <main>
-      <video class="video" autoplay="1"></video>
+      <video
+        class="video"
+        autoplay="1"
+        style="transform: rotateY(180deg)"
+      ></video>
       <div class="bottom-toolbar">
-        <button type="button" onclick="videoStart()">Start</button>　
-        <button type="button" onclick="videoStop()">Stop</button>
-        <button type="button" onclick="reverse()">Mirror</button>
+        <button type="button" class="icon-button" onclick="videoStart()">
+          ▶️</button
+        >　
+        <button type="button" class="icon-button" onclick="videoStop()">
+          ◼
+        </button>
+        <button type="button" class="icon-button" onclick="reverse()">⇔</button>
         <select class="select"></select>
       </div>
     </main>

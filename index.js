@@ -35,7 +35,7 @@ function videoStop() {
 
 function reverse() {
   var video = document.querySelector(".video");
-  if (video.style.transform) {
+  if (video.style.transform === "rotateY(180deg)") {
     video.style.transform = "";
   } else {
     video.style.transform = "rotateY(180deg)";
